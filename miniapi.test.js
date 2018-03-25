@@ -37,7 +37,7 @@ describe('web server testing', () => {
     miniapi.withPort(PORT).withData(DATA).start();
     http.get(GET_URL, () => {
         done();
-                miniapi.stop();
+        miniapi.stop();
     });
   });
 

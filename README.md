@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/pxai/miniapi.svg?branch=master)](https://travis-ci.org/pxai/miniapi)
 [![CircleCI](https://circleci.com/gh/pxai/miniapi.svg?style=svg)](https://circleci.com/gh/pxai/miniapi)
 [![Coverage Status](https://coveralls.io/repos/github/pxai/miniapi/badge.svg)](https://coveralls.io/github/pxai/miniapi)
+[![npm version](https://badge.fury.io/js/miniapi.svg)](https://badge.fury.io/js/miniapi)
 
 Minimalistic API server
 By default it opens a HTTP server on [port 3000](http://localhost:3000)

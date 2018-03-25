@@ -38,7 +38,7 @@ class Miniapi  {
   }
 
  start () {
-   this.server = http.createServer((req, res) => {
+    this.server = http.createServer((req, res) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', this.contentType);
     res.end(`${JSON.stringify(this.data)}\n`);
