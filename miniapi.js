@@ -16,7 +16,7 @@ class Miniapi  {
   }
 
   getPort () {
-      return port;
+      return this.port;
   }
 
   withContentType (contentType) {
@@ -25,7 +25,7 @@ class Miniapi  {
   }
 
   getContentType () {
-      return port;
+      return this.contentType;
   }
 
   withData (data) {
