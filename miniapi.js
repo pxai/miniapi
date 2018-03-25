@@ -49,6 +49,10 @@ class Miniapi  {
   });
  }
 
+ stop () {
+   this.server.close();
+ }
+
   version ()  {
     return '1.0';
   }

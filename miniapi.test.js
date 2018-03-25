@@ -31,22 +31,27 @@ describe('basic tests working', () => {
 });
 
 describe('web server testing', () => {
-  miniapi.withPort(PORT).withData(DATA).start();
+
 
   it('it is opened', (done) => {
+    miniapi.withPort(PORT).withData(DATA).start();
     http.get(GET_URL, () => {
         done();
+                miniapi.stop();
     });
   });
 
   it('should return 200 code', (done) => {
+    miniapi.withPort(PORT).withData(DATA).start();
     http.get(GET_URL, (resp) => {
       expect(resp.statusCode).toBe(200);
       done();
+      miniapi.stop();
     });
   });
 
   it('it should return json data', (done) => {
+    miniapi.withPort(PORT).withData(DATA).start();
     http.get(GET_URL, (resp) => {
       let data = '';
       resp.on('data', (chunk) => {
@@ -57,6 +62,7 @@ describe('web server testing', () => {
         expect(apiData.length).toBe(DATA.length);
         expect(apiData[0].name).toBe('Swords');
         done();
+        miniapi.stop();
       });
     });
   });
