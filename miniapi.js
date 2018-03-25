@@ -45,7 +45,7 @@ class Miniapi  {
   });
 
   this.server.listen(this.port, this.hostname, () => {
-    console.log(`Server running at http://${this.hostname}:${this.port}/`);
+    console.log(`[miniapi server running at http://${this.hostname}:${this.port}/]`);
   });
  }
 
@@ -54,4 +54,4 @@ class Miniapi  {
   }
 };
 
-module.exports=new Miniapi('epa');
+module.exports=new Miniapi('api');

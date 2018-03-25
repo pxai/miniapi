@@ -1,3 +1,2 @@
-const miniapi = require('./miniapi');
-
-miniapi.start();
+const miniapi = require('./');
+miniapi.start()
