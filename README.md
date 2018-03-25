@@ -3,6 +3,8 @@
 [![CircleCI](https://circleci.com/gh/pxai/miniapi.svg?style=svg)](https://circleci.com/gh/pxai/miniapi)
 
 Minimalistic API server
+By default it opens a HTTP server on [port 3000](http://localhost:3000)
+and serves some json.
 
 ## Instalation
 Using npm
