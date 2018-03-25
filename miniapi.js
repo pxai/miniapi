@@ -8,7 +8,6 @@ class Miniapi  {
     this.contentType = 'application/json';
     this.data = data;
     this.hostname = 'localhost';
-    this.init();
   }
 
   withPort (port) {
@@ -38,7 +37,7 @@ class Miniapi  {
       return data;
   }
 
- init () {
+ start () {
    this.server = http.createServer((req, res) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', this.contentType);
