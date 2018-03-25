@@ -1,4 +1,9 @@
 # miniapi
 Minimalistic API server
 
-We're on it, hang on
+## setting up
+
+Just do:
+```
+require('miniapi')
+```
