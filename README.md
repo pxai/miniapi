@@ -19,9 +19,26 @@ miniapi.start();
 ```
 
 This will create a very simple web server returning this json document:
-```json
+```javascript
 [
   { id: 1, name: 'Alice'},
   {id: 2, name: 'Bob'}
 ]
+```
+
+## Options
+You can change some default settings with clauses:
+```javascript
+const miniapi = require('miniapi');
+miniapi
+  .withPort(3200)
+  .start();
+```
+
+You can also change the data:
+```javascript
+miniapi
+  .withPort(3200)
+  .withData([{id: 3, name: 'Thor'},{ id: 666, name: 'Loki'}])
+  .start();
 ```
