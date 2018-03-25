@@ -5,6 +5,7 @@ Minimalistic API server
 ## setting up
 
 Just do:
-```
-require('miniapi')
+```node
+const miniapi = require('miniapi');
+miniapi.start();
 ```
