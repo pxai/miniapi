@@ -1,12 +1,12 @@
 http = require('http');
-let data = [];
+let data = [{ id: 1, name: 'Alice'}, {id: 2, name: 'Bob'}];
 
 class Miniapi  {
   constructor (name) {
     this.name = name;
     this.port = 3000;
     this.contentType = 'application/json';
-    this.data = [];
+    this.data = data;
     this.hostname = 'localhost';
     this.init();
   }
@@ -42,7 +42,7 @@ class Miniapi  {
    this.server = http.createServer((req, res) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', this.contentType);
-    res.end('Hello World!\n');
+    res.end(`${JSON.stringify(this.data)}\n`);
   });
 
   this.server.listen(this.port, this.hostname, () => {

@@ -1,0 +1,1 @@
+const miniapi = require('./miniapi');
