@@ -13,9 +13,8 @@ npm install miniapi
 ```
 
 ## Setting up
-
 Just do:
-```node
+```javascript
 const miniapi = require('miniapi');
 miniapi.start();
 ```
