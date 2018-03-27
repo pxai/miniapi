@@ -2,6 +2,7 @@ http = require('http');
 
 
 let data = [{ id: 1, name: 'Alice'}, {id: 2, name: 'Bob'}];
+let id = 3;
 
 class Miniapi  {
   constructor (name) {
@@ -54,8 +55,19 @@ class Miniapi  {
     let url = req.url.match(/\/(.*)\/(.*)/);
 
     res.setHeader('Content-Type', this.contentType);
-    this.reply(url, req.method, res);
 
+    if (req.method === 'POST') {
+        var body = '';
+        var self = this;
+       req.on('data', function (data) {
+           body += data;
+       });
+       req.on('end', function () {
+         self.reply(url, req.method, res, body);
+       });
+    } else {
+      this.reply(url, req.method, res);
+    }
   });
 
   this.server.listen(this.port, this.hostname, () => {
@@ -71,7 +83,7 @@ class Miniapi  {
     return '1.0';
   }
 
-  reply (url, method, res) {
+  reply (url, method, res, requestBody) {
     let data = {};
     res.statusCode = 404;
 
@@ -84,9 +96,16 @@ class Miniapi  {
                       res.statusCode = data.id==undefined?404:200;
                   }
                   break;
-      case 'POST':
-                    data = {error: 'POST Not supported yet. Stay tuned.'};
-                    res.statusCode = 404;
+      case 'POST':  if (null != url && url[1] === this.name) {
+                        let newData = JSON.parse(requestBody);
+                        newData.id = id++;
+                        this.data.push(newData);
+                        data = newData;
+                        res.statusCode = 200;
+                    } else {
+                        data = {error: 'POST Not supported yet. Stay tuned.'};
+                        res.statusCode = 404;
+                    }
                     break;
       case 'PUT':
                     data = {error: 'PUT Not supported yet. Stay tuned.'};

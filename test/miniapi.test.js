@@ -161,7 +161,7 @@ describe('GET API testing', () => {
 
 describe('POST testing', () => {
   it('should add data', (done) => {
-    payload = JSON.stringify({});
+    let payload = JSON.stringify({ name:  'Node rules'});
     miniapi.withPort(PORT).withData(DATA).start();
     http.request({
       host: 'localhost',
@@ -178,8 +178,8 @@ describe('POST testing', () => {
         data += chunk;
       });
       resp.on('end', () => {
-        apiData = JSON.parse(data);
-        expect(apiData.error).toBe('POST Not supported yet. Stay tuned.');
+        expect(JSON.parse(data)).toEqual({ id: 3, name:  'Node rules'});
+        expect(resp.statusCode).toBe(200);
         done();
         miniapi.stop();
       });

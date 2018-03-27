@@ -67,6 +67,17 @@ This will return just one record with 200 code.
 
 Or it will return {} with 404 if there is no match.
 
+### POST /{name}
+Expects a JSON body, for example:
+
+```javascript
+{ name: 'Miniapi rulez'}
+```
+This will return the newly created record with 200 code.
+- POST /user  or POST /{name}
+
+Or it will return {} with 404 if url is incorrect.
+
 ### DELETE /{name}/{id}
   This will return the deleted record with 200 code.
   - DELETE /user/1  or DELETE /{name}/{id}
