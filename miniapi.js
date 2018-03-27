@@ -79,7 +79,6 @@ class Miniapi  {
 
  stop () {
    this.server.close();
-   log.info(`[miniapi server stopped`);
  }
 
   version ()  {

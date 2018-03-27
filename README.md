@@ -7,6 +7,7 @@
 [![npm version](https://badge.fury.io/js/miniapi.svg)](https://badge.fury.io/js/miniapi)
 
 Minimalistic API server
+
 By default it opens a HTTP server on [port 3000](http://localhost:3000)
 and serves some json.
 
@@ -100,3 +101,6 @@ Or it will return {} with 404 if url is incorrect.
   - DELETE /user/1  or DELETE /{name}/{id}
 
   Or it will return {} with 404 if there is no match.
+
+## Greets
+⚔️
