@@ -1,4 +1,6 @@
 # miniapi
+![miniapi](miniapi.png)
+
 [![Build Status](https://travis-ci.org/pxai/miniapi.svg?branch=master)](https://travis-ci.org/pxai/miniapi)
 [![CircleCI](https://circleci.com/gh/pxai/miniapi.svg?style=svg)](https://circleci.com/gh/pxai/miniapi)
 [![Coverage Status](https://coveralls.io/repos/github/pxai/miniapi/badge.svg)](https://coveralls.io/github/pxai/miniapi)
@@ -75,6 +77,21 @@ Expects a JSON body, for example:
 ```
 This will return the newly created record with 200 code.
 - POST /user  or POST /{name}
+
+Or it will return {} with 404 if url is incorrect.
+
+### PUT /{name}/{id}
+Expects a JSON body, for example:
+
+```javascript
+  { name: 'Miniapi rulez'}
+```
+This will return the updated record with 200 code:
+```javascript
+  { id: 1, name: 'Miniapi rulez'}
+```
+
+- PUT /user/1  or PUT /{name}/{id}
 
 Or it will return {} with 404 if url is incorrect.
 

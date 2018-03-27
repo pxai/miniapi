@@ -244,7 +244,7 @@ describe('DELETE testing', () => {
 
 describe('PUT testing', () => {
   it('should change data', (done) => {
-    payload = JSON.stringify({});
+    let payload = JSON.stringify({ name:  'Name changed'});
     miniapi.withPort(PORT).withData(DATA).start();
     http.request({
       host: 'localhost',
@@ -261,8 +261,8 @@ describe('PUT testing', () => {
         data += chunk;
       });
       resp.on('end', () => {
-        apiData = JSON.parse(data);
-        expect(apiData.error).toBe('PUT Not supported yet. Stay tuned.');
+        expect(JSON.parse(data)).toEqual({ id: 1, name:  'Name changed'});
+        expect(resp.statusCode).toBe(200);
         done();
         miniapi.stop();
       });

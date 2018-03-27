@@ -1,5 +1,5 @@
-http = require('http');
-
+const http = require('http');
+const requestHandler = require('./requestHandler');
 
 let data = [{ id: 1, name: 'Alice'}, {id: 2, name: 'Bob'}];
 let id = 3;
@@ -53,10 +53,11 @@ class Miniapi  {
     this.server = http.createServer((req, res) => {
     res.statusCode = 200;
     let url = req.url.match(/\/(.*)\/(.*)/);
-
+    requestHandler.setData(this.data);
+    requestHandler.setName(this.name);
     res.setHeader('Content-Type', this.contentType);
 
-    if (req.method === 'POST') {
+    if (req.method === 'POST' || req.method === 'PUT') {
         var body = '';
         var self = this;
        req.on('data', function (data) {
@@ -88,13 +89,9 @@ class Miniapi  {
     res.statusCode = 404;
 
     switch (method) {
-      case 'GET':   if (null == url || url[1] === '' || (url[1] === this.name && url[2] == '')) {
-                      data = this.data;
-                      res.statusCode = 200;
-                    } else if (url[1] === this.name && url[2] != '') {
-                      data = this.data.filter( item => item.id==url[2])[0] || {};
-                      res.statusCode = data.id==undefined?404:200;
-                  }
+      case 'GET':
+                  res = requestHandler.get(url, method, res);
+                  data = res.data;
                   break;
       case 'POST':  if (null != url && url[1] === this.name) {
                         let newData = JSON.parse(requestBody);
@@ -108,8 +105,17 @@ class Miniapi  {
                     }
                     break;
       case 'PUT':
-                    data = {error: 'PUT Not supported yet. Stay tuned.'};
-                    res.statusCode = 404;
+                  if (null != url && url[1] === this.name && url[2] != '') {
+                      data = this.data.filter( item => item.id==url[2])[0] || {};
+                      if (data.id != undefined) {
+                            let newData = JSON.parse(requestBody);
+                            this.data = this.data.filter( item => item.id!=url[2]);
+                            newData.id = parseInt(url[2]);
+                            this.data.push(newData);
+                            data = newData;
+                      }
+                      res.statusCode = data.id==undefined?404:200;
+                  }
                     break;
       case 'DELETE':
                      if (null == url || url[1] === '' || (url[1] === this.name && url[2] == '')) {
