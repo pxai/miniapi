@@ -72,27 +72,41 @@ class Miniapi  {
   }
 
   reply (url, method, res) {
-    let data = '';
+    let data = {};
+    res.statusCode = 404;
+
     switch (method) {
       case 'GET':   if (null == url || url[1] === '' || (url[1] === this.name && url[2] == '')) {
                       data = this.data;
+                      res.statusCode = 200;
                     } else if (url[1] === this.name && url[2] != '') {
                       data = this.data.filter( item => item.id==url[2])[0] || {};
-                    }
+                      res.statusCode = data.id==undefined?404:200;
+                  }
                   break;
       case 'POST':
                     data = {error: 'POST Not supported yet. Stay tuned.'};
+                    res.statusCode = 404;
                     break;
       case 'PUT':
                     data = {error: 'PUT Not supported yet. Stay tuned.'};
+                    res.statusCode = 404;
                     break;
       case 'DELETE':
-                    data = {error: 'DELETE Not supported yet. Stay tuned.'};
+                     if (null == url || url[1] === '' || (url[1] === this.name && url[2] == '')) {
+                       res.statusCode = 404
+                     } else if (url[1] === this.name && url[2] != '') {
+                       data = this.data.filter( item => item.id==url[2])[0] || {};
+                       this.data = this.data.filter( item => item.id!=url[2]);
+                       res.statusCode = data.id==undefined?404:200;;
+                     }
                     break;
       default:
                     data = { error: 'Whatever you tried, it is not supported.'};
+                    res.statusCode = 404;
                     break;
      }
+
       res.end(`${JSON.stringify(data)}\n`);
   }
 };

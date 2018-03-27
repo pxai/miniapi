@@ -56,13 +56,19 @@ Then, all requests should go to */myapi*
 ## The API
 
 ### GET /
-Any of these will return all data:
+Any of these will return all data with 200 code.
 - GET /
 - GET /user  or GET /{name}
 - GET /user/ or GET /{name}
 
 ### GET /{name}/{id}
-This will return just one record:
+This will return just one record with 200 code.
 - GET /user/1  or GET /{name}/{id}
 
-Or it will return {} if there is no match.
+Or it will return {} with 404 if there is no match.
+
+### DELETE /{name}/{id}
+  This will return the deleted record with 200 code.
+  - DELETE /user/1  or DELETE /{name}/{id}
+
+  Or it will return {} with 404 if there is no match.

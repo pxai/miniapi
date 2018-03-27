@@ -83,6 +83,7 @@ describe('GET API testing', () => {
         apiData = JSON.parse(data);
         expect(apiData.length).toBe(DATA.length);
         expect(apiData[0].name).toBe('Bob');
+        expect(resp.statusCode).toBe(200);
         done();
         miniapi.stop();
       });
@@ -100,6 +101,7 @@ describe('GET API testing', () => {
         apiData = JSON.parse(data);
         expect(apiData.length).toBe(DATA.length);
         expect(apiData[0].name).toBe('Bob');
+        expect(resp.statusCode).toBe(200);
         done();
         miniapi.stop();
       });
@@ -117,6 +119,7 @@ describe('GET API testing', () => {
         apiData = JSON.parse(data);
         expect(apiData.length).toBe(DATA.length);
         expect(apiData[0].name).toBe('Bob');
+        expect(resp.statusCode).toBe(200);
         done();
         miniapi.stop();
       });
@@ -132,6 +135,7 @@ describe('GET API testing', () => {
       });
       resp.on('end', () => {
         expect(JSON.parse(data)).toEqual(DATA[0]);
+        expect(resp.statusCode).toBe(200);
         done();
         miniapi.stop();
       });
@@ -147,6 +151,7 @@ describe('GET API testing', () => {
       });
       resp.on('end', () => {
         expect(JSON.parse(data)).toEqual({});
+        expect(resp.statusCode).toBe(404);
         done();
         miniapi.stop();
       });
@@ -155,7 +160,7 @@ describe('GET API testing', () => {
 });
 
 describe('POST testing', () => {
-  it('should delete data', (done) => {
+  it('should add data', (done) => {
     payload = JSON.stringify({});
     miniapi.withPort(PORT).withData(DATA).start();
     http.request({
@@ -202,8 +207,34 @@ describe('DELETE testing', () => {
         data += chunk;
       });
       resp.on('end', () => {
-        apiData = JSON.parse(data);
-        expect(apiData.error).toBe('DELETE Not supported yet. Stay tuned.');
+        expect(JSON.parse(data)).toEqual(DATA[0]);
+        expect(resp.statusCode).toBe(200);
+        done();
+        miniapi.stop();
+      });
+    }).write(payload);
+  });
+
+  it('should NOT delete data', (done) => {
+    payload = JSON.stringify({});
+    miniapi.withPort(PORT).withData(DATA).start();
+    http.request({
+      host: 'localhost',
+      port: PORT,
+      path: '/user/456343',
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    }, (resp) => {
+     let data = '';
+      resp.on('data', (chunk) => {
+        data += chunk;
+      });
+      resp.on('end', () => {
+        expect(JSON.parse(data)).toEqual({});
+        expect(resp.statusCode).toBe(404);
         done();
         miniapi.stop();
       });
@@ -212,7 +243,7 @@ describe('DELETE testing', () => {
 });
 
 describe('PUT testing', () => {
-  it('should delete data', (done) => {
+  it('should change data', (done) => {
     payload = JSON.stringify({});
     miniapi.withPort(PORT).withData(DATA).start();
     http.request({
