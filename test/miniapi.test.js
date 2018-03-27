@@ -153,3 +153,88 @@ describe('GET API testing', () => {
     });
   });
 });
+
+describe('POST testing', () => {
+  it('should delete data', (done) => {
+    payload = JSON.stringify({});
+    miniapi.withPort(PORT).withData(DATA).start();
+    http.request({
+      host: 'localhost',
+      port: PORT,
+      path: '/user/1',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    }, (resp) => {
+     let data = '';
+      resp.on('data', (chunk) => {
+        data += chunk;
+      });
+      resp.on('end', () => {
+        apiData = JSON.parse(data);
+        expect(apiData.error).toBe('POST Not supported yet. Stay tuned.');
+        done();
+        miniapi.stop();
+      });
+    }).write(payload);
+  });
+});
+
+
+describe('DELETE testing', () => {
+  it('should delete data', (done) => {
+    payload = JSON.stringify({});
+    miniapi.withPort(PORT).withData(DATA).start();
+    http.request({
+      host: 'localhost',
+      port: PORT,
+      path: '/user/1',
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    }, (resp) => {
+     let data = '';
+      resp.on('data', (chunk) => {
+        data += chunk;
+      });
+      resp.on('end', () => {
+        apiData = JSON.parse(data);
+        expect(apiData.error).toBe('DELETE Not supported yet. Stay tuned.');
+        done();
+        miniapi.stop();
+      });
+    }).write(payload);
+  });
+});
+
+describe('PUT testing', () => {
+  it('should delete data', (done) => {
+    payload = JSON.stringify({});
+    miniapi.withPort(PORT).withData(DATA).start();
+    http.request({
+      host: 'localhost',
+      port: PORT,
+      path: '/user/1',
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    }, (resp) => {
+     let data = '';
+      resp.on('data', (chunk) => {
+        data += chunk;
+      });
+      resp.on('end', () => {
+        apiData = JSON.parse(data);
+        expect(apiData.error).toBe('PUT Not supported yet. Stay tuned.');
+        done();
+        miniapi.stop();
+      });
+    }).write(payload);
+  });
+});

@@ -53,9 +53,6 @@ class Miniapi  {
     res.statusCode = 200;
     let url = req.url.match(/\/(.*)\/(.*)/);
 
-  //  console.log('A ver: ', url);
-  //  console.log(req.url, req.method);
-
     res.setHeader('Content-Type', this.contentType);
     this.reply(url, req.method, res);
 
@@ -90,7 +87,7 @@ class Miniapi  {
                     data = {error: 'PUT Not supported yet. Stay tuned.'};
                     break;
       case 'DELETE':
-                    data = {error: 'PUT Not supported yet. Stay tuned.'};
+                    data = {error: 'DELETE Not supported yet. Stay tuned.'};
                     break;
       default:
                     data = { error: 'Whatever you tried, it is not supported.'};
