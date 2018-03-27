@@ -1,8 +1,9 @@
 const http = require('http');
 const requestHandler = require('./requestHandler');
+const log = require('./log');
 
 let data = [{ id: 1, name: 'Alice'}, {id: 2, name: 'Bob'}];
-let id = 3;
+
 
 class Miniapi  {
   constructor (name) {
@@ -51,7 +52,7 @@ class Miniapi  {
 
  start () {
     this.server = http.createServer((req, res) => {
-    res.statusCode = 200;
+
     let url = req.url.match(/\/(.*)\/(.*)/);
     requestHandler.setData(this.data);
     requestHandler.setName(this.name);
@@ -72,12 +73,13 @@ class Miniapi  {
   });
 
   this.server.listen(this.port, this.hostname, () => {
-    console.log(`[miniapi server running at http://${this.hostname}:${this.port}/]`);
+    log.info(`[miniapi server running at http://${this.hostname}:${this.port}/]`);
   });
  }
 
  stop () {
    this.server.close();
+   log.info(`[miniapi server stopped`);
  }
 
   version ()  {
@@ -85,54 +87,29 @@ class Miniapi  {
   }
 
   reply (url, method, res, requestBody) {
-    let data = {};
+    res.data = {};
     res.statusCode = 404;
 
     switch (method) {
       case 'GET':
                   res = requestHandler.get(url, method, res);
-                  data = res.data;
                   break;
-      case 'POST':  if (null != url && url[1] === this.name) {
-                        let newData = JSON.parse(requestBody);
-                        newData.id = id++;
-                        this.data.push(newData);
-                        data = newData;
-                        res.statusCode = 200;
-                    } else {
-                        data = {error: 'POST Not supported yet. Stay tuned.'};
-                        res.statusCode = 404;
-                    }
+      case 'POST':
+                    res = requestHandler.post(url, method, res, requestBody);
                     break;
       case 'PUT':
-                  if (null != url && url[1] === this.name && url[2] != '') {
-                      data = this.data.filter( item => item.id==url[2])[0] || {};
-                      if (data.id != undefined) {
-                            let newData = JSON.parse(requestBody);
-                            this.data = this.data.filter( item => item.id!=url[2]);
-                            newData.id = parseInt(url[2]);
-                            this.data.push(newData);
-                            data = newData;
-                      }
-                      res.statusCode = data.id==undefined?404:200;
-                  }
+                    res = requestHandler.put(url, method, res, requestBody);
                     break;
       case 'DELETE':
-                     if (null == url || url[1] === '' || (url[1] === this.name && url[2] == '')) {
-                       res.statusCode = 404
-                     } else if (url[1] === this.name && url[2] != '') {
-                       data = this.data.filter( item => item.id==url[2])[0] || {};
-                       this.data = this.data.filter( item => item.id!=url[2]);
-                       res.statusCode = data.id==undefined?404:200;;
-                     }
+                    res = requestHandler.delete(url, method, res);
                     break;
       default:
-                    data = { error: 'Whatever you tried, it is not supported.'};
+                    res.data = { error: 'Whatever you tried, it is not supported.'};
                     res.statusCode = 404;
                     break;
      }
 
-      res.end(`${JSON.stringify(data)}\n`);
+      res.end(`${JSON.stringify(res.data)}\n`);
   }
 };
 
