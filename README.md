@@ -21,7 +21,7 @@ const miniapi = require('miniapi');
 miniapi.start();
 ```
 
-This will create a very simple web server returning this json document:
+This will create a very simple web server serving this json document:
 ```javascript
 [
   { id: 1, name: 'Alice'},
@@ -45,3 +45,24 @@ miniapi
   .withData([{id: 3, name: 'Thor'},{ id: 666, name: 'Loki'}])
   .start();
 ```
+By default, the name of the API is *user*. You can change it using *withName* clause:
+```javascript
+miniapi
+  .withName('myapi')
+  .start();
+```
+Then, all requests should go to */myapi*
+
+## The API
+
+### GET /
+Any of these will return all data:
+- GET /
+- GET /user  or GET /{name}
+- GET /user/ or GET /{name}
+
+### GET /{name}/{id}
+This will return just one record:
+- GET /user/1  or GET /{name}/{id}
+
+Or it will return {} if there is no match.
