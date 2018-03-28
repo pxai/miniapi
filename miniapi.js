@@ -51,15 +51,12 @@ class Miniapi  {
   }
 
  start () {
+   requestHandler.setData(this.data);
+   requestHandler.setName(this.name);
+
     this.server = http.createServer((req, res) => {
-
-    let url = req.url.split("/");//;req.url.match(/\/(.*)\/(.*)/);
-
-    log.warn(req.url + ", "+ url[0]+", " + url[1])
-    requestHandler.setData(this.data);
-    requestHandler.setName(this.name);
+    let url = req.url.split("/");
     res.setHeader('Content-Type', this.contentType);
-
     if (req.method === 'POST' || req.method === 'PUT') {
         var body = '';
         var self = this;

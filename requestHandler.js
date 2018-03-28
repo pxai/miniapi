@@ -31,7 +31,7 @@ class RequestHandler {
         res.statusCode = data.id==undefined?404:200;
     }
     res.data = data;
-      log.byCode(`GET ${res.statusCode} ${url}`, res.statusCode);
+      log.byCode(`🌐  GET ${res.statusCode} ${url}`, res.statusCode);
       return res;
   }
 
@@ -49,7 +49,7 @@ class RequestHandler {
         res.statusCode = 404;
       }
     res.data = data;
-          log.byCode(`POST ${res.statusCode} ${url}`, res.statusCode);
+          log.byCode(`➕ POST ${res.statusCode} ${url}`, res.statusCode);
       return res;
   }
 
@@ -65,7 +65,7 @@ class RequestHandler {
       res.statusCode = data.id==undefined?404:200;;
     }
     res.data = data;
-          log.byCode(`DELETE ${res.statusCode} ${url}`, res.statusCode);
+          log.byCode(`➖ DELETE ${res.statusCode} ${url}`, res.statusCode);
       return res;
   }
 
@@ -84,7 +84,7 @@ class RequestHandler {
         res.statusCode = data.id==undefined?404:200;
     }
     res.data = data;
-    log.byCode(`PUT ${res.statusCode} ${url}`, res.statusCode);
+    log.byCode(`📝 PUT ${res.statusCode} ${url}`, res.statusCode);
       return res;
   }
 
