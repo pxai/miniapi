@@ -23,8 +23,7 @@ class RequestHandler {
   get (url, method, res) {
     let data = {};
     res.statusCode = 404;
-
-    if (null == url || url[1] === '' || (url[1] == this.name && url[2] == '')) {
+    if (null == url || url[1] === '' || (url[1] == this.name && url[2] == undefined || url[2] == '')) {
         data = this.data;
         res.statusCode = 200;
     } else if (url[1] === this.name && url[2] != '') {
@@ -50,7 +49,7 @@ class RequestHandler {
         res.statusCode = 404;
       }
     res.data = data;
-          log.byCode(`GET ${res.statusCode} ${url}`, res.statusCode);
+          log.byCode(`POST ${res.statusCode} ${url}`, res.statusCode);
       return res;
   }
 
@@ -66,7 +65,7 @@ class RequestHandler {
       res.statusCode = data.id==undefined?404:200;;
     }
     res.data = data;
-          log.byCode(`GET ${res.statusCode} ${url}`, res.statusCode);
+          log.byCode(`DELETE ${res.statusCode} ${url}`, res.statusCode);
       return res;
   }
 
@@ -85,7 +84,7 @@ class RequestHandler {
         res.statusCode = data.id==undefined?404:200;
     }
     res.data = data;
-    log.byCode(`GET ${res.statusCode} ${url}`, res.statusCode);
+    log.byCode(`PUT ${res.statusCode} ${url}`, res.statusCode);
       return res;
   }
 

@@ -166,7 +166,7 @@ describe('POST testing', () => {
     http.request({
       host: 'localhost',
       port: PORT,
-      path: '/user/1',
+      path: '/user/',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -179,6 +179,32 @@ describe('POST testing', () => {
       });
       resp.on('end', () => {
         expect(JSON.parse(data)).toEqual({ id: 3, name:  'Node rules'});
+        expect(resp.statusCode).toBe(200);
+        done();
+        miniapi.stop();
+      });
+    }).write(payload);
+  });
+
+  it('should add data, trailing slash', (done) => {
+    let payload = JSON.stringify({ name:  'Node rules'});
+    miniapi.withPort(PORT).withData(DATA).start();
+    http.request({
+      host: 'localhost',
+      port: PORT,
+      path: '/user',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    }, (resp) => {
+     let data = '';
+      resp.on('data', (chunk) => {
+        data += chunk;
+      });
+      resp.on('end', () => {
+        expect(JSON.parse(data)).toEqual({ id: 4, name:  'Node rules'});
         expect(resp.statusCode).toBe(200);
         done();
         miniapi.stop();

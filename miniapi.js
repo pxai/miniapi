@@ -53,7 +53,9 @@ class Miniapi  {
  start () {
     this.server = http.createServer((req, res) => {
 
-    let url = req.url.match(/\/(.*)\/(.*)/);
+    let url = req.url.split("/");//;req.url.match(/\/(.*)\/(.*)/);
+
+    log.warn(req.url + ", "+ url[0]+", " + url[1])
     requestHandler.setData(this.data);
     requestHandler.setName(this.name);
     res.setHeader('Content-Type', this.contentType);
