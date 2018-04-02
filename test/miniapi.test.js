@@ -33,6 +33,11 @@ describe('basic tests working', () => {
     miniapi.withContentType('application/json');
     expect(miniapi.getContentType()).toBe('application/json');
   });
+
+  it('should set id correcty', () => {
+    miniapi.withId('id');
+    expect(miniapi.getId()).toBe('id');
+  })
 });
 
 describe('web server testing', () => {
@@ -277,6 +282,34 @@ describe('PUT testing', () => {
       port: PORT,
       path: '/user/1',
       method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    }, (resp) => {
+     let data = '';
+      resp.on('data', (chunk) => {
+        data += chunk;
+      });
+      resp.on('end', () => {
+        expect(JSON.parse(data)).toEqual({ id: 1, name:  'Name changed'});
+        expect(resp.statusCode).toBe(200);
+        done();
+        miniapi.stop();
+      });
+    }).write(payload);
+  });
+});
+
+describe('PATCH testing, just as the PUT', () => {
+  it('Should change the entry', (done)=> {
+    let payload = JSON.stringify({ name:  'Name changed'});
+    miniapi.withPort(PORT).withData(DATA).start();
+    http.request({
+      host: 'localhost',
+      port: PORT,
+      path: '/user/1',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(payload)

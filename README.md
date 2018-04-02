@@ -56,6 +56,15 @@ miniapi
 ```
 Then, all requests should go to */myapi*
 
+If you change the *id* with *setId*, you must provide coherent data:
+```javascript
+miniapi
+  .withPort(3200)
+  .withId('_id')
+  .withData([{_id: 3, name: 'Thor'},{ _id: 666, name: 'Loki'}])
+  .start();
+```
+
 ## The API
 
 ### GET /
@@ -93,6 +102,23 @@ This will return the updated record with 200 code:
 ```
 
 - PUT /user/1  or PUT /{name}/{id}
+
+Or it will return {} with 404 if url is incorrect.
+
+### PATCH /{name}/{id}
+For the moment, it's just like PUT.
+Expects a JSON body, for example:
+
+```javascript
+    { name: 'Miniapi rulez'}
+```
+
+This will return the updated record with 200 code:
+```javascript
+    { id: 1, name: 'Miniapi rulez'}
+```
+
+- PATCH /user/1  or PATCH /{name}/{id}
 
 Or it will return {} with 404 if url is incorrect.
 

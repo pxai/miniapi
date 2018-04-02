@@ -12,6 +12,7 @@ class Miniapi  {
     this.contentType = 'application/json';
     this.data = data;
     this.hostname = 'localhost';
+    this.id = 'id';
   }
 
   withName (name) {
@@ -50,14 +51,24 @@ class Miniapi  {
       return this.data;
   }
 
+  withId (id) {
+    this.id = id;
+    return this;
+  }
+
+  getId() {
+    return this.id;
+  }
+
  start () {
    requestHandler.setData(this.data);
    requestHandler.setName(this.name);
+   requestHandler.setId(this.id);
 
     this.server = http.createServer((req, res) => {
     let url = req.url.split("/");
     res.setHeader('Content-Type', this.contentType);
-    if (req.method === 'POST' || req.method === 'PUT') {
+    if (req.method === 'POST' || req.method === 'PUT' || req.method === 'PATCH') {
         var body = '';
         var self = this;
        req.on('data', function (data) {
@@ -97,6 +108,9 @@ class Miniapi  {
                     break;
       case 'PUT':
                     res = requestHandler.put(url, method, res, requestBody);
+                    break;
+      case 'PATCH':
+                    res = requestHandler.patch(url, method, res, requestBody);
                     break;
       case 'DELETE':
                     res = requestHandler.delete(url, method, res);

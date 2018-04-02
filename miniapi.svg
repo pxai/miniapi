@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="324.71954"
+     inkscape:cx="307.00839"
      inkscape:cy="653.43919"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -65,5 +65,19 @@
            x="45.714287"
            y="238.07649" /></flowRegion><flowPara
          id="flowPara4142"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Gubblebum;-inkscape-font-specification:'Gubblebum Medium'">miniapi</flowPara></flowRoot>  </g>
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Gubblebum;-inkscape-font-specification:'Gubblebum Medium'">miniapi</flowPara></flowRoot>    <flowRoot
+       transform="matrix(2.3092042,0,0,2.3092042,58.566225,-267.78538)"
+       xml:space="preserve"
+       id="flowRoot4136-4"
+       style="font-style:normal;font-weight:normal;font-size:30px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><flowRegion
+         id="flowRegion4138-3"><rect
+           id="rect4140-3"
+           width="119.04656"
+           height="97.093925"
+           x="45.714287"
+           y="238.07649" /></flowRegion><flowPara
+         id="flowPara4142-3"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Gubblebum;-inkscape-font-specification:'Gubblebum Medium';fill:#0088aa;fill-opacity:1">miniapi </flowPara></flowRoot>  </g>
 </svg>
