@@ -1,6 +1,6 @@
 {
   "name": "miniapi",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Minimalistic api server",
   "main": "index.js",
   "scripts": {
