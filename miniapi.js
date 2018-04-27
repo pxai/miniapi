@@ -1,6 +1,7 @@
 const http = require('http');
 const requestHandler = require('./requestHandler');
 const log = require('./log');
+const fs = require('fs');
 
 let data = [{ id: 1, name: 'Alice'}, {id: 2, name: 'Bob'}];
 
@@ -49,6 +50,16 @@ class Miniapi  {
 
   getData () {
       return this.data;
+  }
+
+  withDataFrom (file) {
+      try {
+      this.data = JSON.parse(fs.readFileSync(file));
+      } catch (e) {
+	console.log('ERROR' + e);
+       //this.data = [];
+      }
+      return this;
   }
 
   withId (id) {

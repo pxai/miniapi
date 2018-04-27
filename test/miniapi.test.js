@@ -37,7 +37,12 @@ describe('basic tests working', () => {
   it('should set id correcty', () => {
     miniapi.withId('id');
     expect(miniapi.getId()).toBe('id');
-  })
+  });
+
+  it('should load contents from file', () => {
+	miniapi.withDataFrom('./sample.json');
+	expect(miniapi.getData().length).toBe(2);
+  });
 });
 
 describe('web server testing', () => {
