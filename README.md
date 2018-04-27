@@ -65,6 +65,16 @@ miniapi
   .start();
 ```
 
+You can also get initial data from a JSON file:
+
+```javascript
+miniapi
+  .withPort(3200)
+  .withId('_id')
+  .withData('./sample.json')
+  .start();
+```
+You can also get data from a JSON file:
 ## The API
 
 ### GET /
