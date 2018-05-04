@@ -74,7 +74,6 @@ miniapi
   .withData('./sample.json')
   .start();
 ```
-You can also get data from a JSON file:
 ## The API
 
 ### GET /

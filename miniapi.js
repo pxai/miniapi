@@ -14,6 +14,7 @@ class Miniapi  {
     this.data = data;
     this.hostname = 'localhost';
     this.id = 'id';
+    this.persist = false;
   }
 
   withName (name) {
@@ -69,6 +70,14 @@ class Miniapi  {
 
   getId() {
     return this.id;
+  }
+
+  getPersist() {
+	return this.persist;
+  }
+
+  withPersist() {
+	this.persist = true; 
   }
 
  start () {

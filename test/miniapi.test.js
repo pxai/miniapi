@@ -43,6 +43,15 @@ describe('basic tests working', () => {
 	miniapi.withDataFrom('./sample.json');
 	expect(miniapi.getData().length).toBe(2);
   });
+
+  it('should have default persist to false', () => {
+	 expect(miniapi.getPersist()).toBe(false);
+	});
+  
+  it('should set persist to true', () => {
+	 miniapi.withPersist();
+	 expect(miniapi.getPersist()).toBe(true);
+	});
 });
 
 describe('web server testing', () => {
