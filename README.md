@@ -74,6 +74,17 @@ miniapi
   .withData('./sample.json')
   .start();
 ```
+
+And you can also apply withPersist to save API data to the same file:
+
+```javascript
+miniapi
+  .withPort(3200)
+  .withId('_id')
+  .withData('./sample.json')
+  .withPersist()
+  .start();
+```
 ## The API
 
 ### GET /
