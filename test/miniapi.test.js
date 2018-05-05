@@ -7,6 +7,10 @@ const DATA = [ { id: 1, name: 'Bob' }, { id: 2, name: 'Alice' } ];
 
 
 describe('basic tests working', () => {
+  afterEach(() => {
+		miniapi.stop;
+		miniapi.persist = false;
+	});
   it('should not be null', () => {
     expect(miniapi).toBeTruthy();
   });

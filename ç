@@ -151,9 +151,8 @@ class Miniapi  {
   }
 
   persistIfEnabled() {
-	if (this.getPersist()) {
-		console.log('PErsisting to: ', this.persist, this.file);
-		fs.writeFileSync(this.file, JSON.stringify(this.data));  
+	if (this.withPersist) {
+		fs.writeFileSync(this.file, this.data);  
 	}
   }
 };
