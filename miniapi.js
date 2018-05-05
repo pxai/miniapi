@@ -78,6 +78,7 @@ class Miniapi  {
 
   withPersist() {
 	this.persist = true; 
+	return this;
   }
 
  start () {
@@ -108,6 +109,8 @@ class Miniapi  {
  }
 
  stop () {
+   this.data = data; 
+   console.log('Stopped: , data: ' , this.data);
    this.server.close();
  }
 
