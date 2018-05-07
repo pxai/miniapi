@@ -65,26 +65,28 @@ miniapi
   .start();
 ```
 
-You can also get initial data from a JSON file:
+You can also get initial data from a JSON file using *withDataFrom* clause:
 
 ```javascript
 miniapi
   .withPort(3200)
   .withId('_id')
-  .withData('./sample.json')
+  .withDataFrom('./sample.json')
   .start();
 ```
 
-And you can also apply withPersist to save API data to the same file:
+And you can also apply *withPersist* to save API data to the same file:
 
 ```javascript
 miniapi
   .withPort(3200)
   .withId('_id')
-  .withData('./sample.json')
+  .withDataFrom('./sample.json')
   .withPersist()
   .start();
 ```
+Obviously, *withPersist* clause needs to set *withDataFrom* clause.
+
 ## The API
 
 ### GET /
