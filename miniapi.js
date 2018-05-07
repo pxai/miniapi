@@ -112,7 +112,7 @@ class Miniapi  {
 
  stop () {
    this.data = data; 
-   console.log('Stopped: , data: ' , this.data);
+   log.info(`[miniapi Stopped]  data: ${JSON.stringify(this.data)}`);
    this.server.close();
  }
 
@@ -152,7 +152,6 @@ class Miniapi  {
 
   persistIfEnabled() {
 	if (this.getPersist()) {
-		console.log('PErsisting to: ', this.persist, this.file);
 		fs.writeFileSync(this.file, JSON.stringify(this.data));  
 	}
   }

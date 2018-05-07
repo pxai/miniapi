@@ -1,16 +1,20 @@
 const expect = require('expect');
 const http = require('http');
+const fs = require('fs');
 const miniapi = require('../miniapi');
 const PORT = 3200;
 const GET_URL = `http://localhost:${PORT}`;
 const DATA = [ { id: 1, name: 'Bob' }, { id: 2, name: 'Alice' } ];
+const FILE = './sample.test.json';
 
+fs.writeFileSync(FILE, JSON.stringify(DATA));
 
 describe('basic tests working', () => {
   afterEach(() => {
 		miniapi.stop;
 		miniapi.persist = false;
 	});
+
   it('should not be null', () => {
     expect(miniapi).toBeTruthy();
   });
@@ -44,7 +48,7 @@ describe('basic tests working', () => {
   });
 
   it('should load contents from file', () => {
-	miniapi.withDataFrom('./sample.json');
+	miniapi.withDataFrom('./sample.test.json');
 	expect(miniapi.getData().length).toBe(2);
   });
 
@@ -97,7 +101,7 @@ describe('web server testing', () => {
 describe('persist mode testing', () => {
 	it('should store and restore data correctly', (done) => {
     let payload = JSON.stringify({ name:  'Node persists'});
-    miniapi.withPort(PORT).withDataFrom('./sample.json').start();
+    miniapi.withPort(PORT).withDataFrom('./sample.test.json').withPersist().start();
     http.request({
       host: 'localhost',
       port: PORT,
@@ -115,6 +119,8 @@ describe('persist mode testing', () => {
       resp.on('end', () => {
         expect(JSON.parse(data)).toEqual({ id: 3, name:  'Node persists'});
         expect(resp.statusCode).toBe(200);
+		const d = JSON.parse(fs.readFileSync(FILE));
+		expect(d.length).toEqual(3);
         done();
         miniapi.stop();
       });
