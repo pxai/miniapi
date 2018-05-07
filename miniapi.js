@@ -56,8 +56,8 @@ class Miniapi  {
 
   withDataFrom (file) {
       try {
-      this.data = JSON.parse(fs.readFileSync(file));
 	  this.file = file;
+      this.data = JSON.parse(fs.readFileSync(this.file));
       } catch (e) {
 	console.log('ERROR' + e);
        //this.data = [];

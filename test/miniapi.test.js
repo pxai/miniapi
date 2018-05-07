@@ -97,7 +97,7 @@ describe('web server testing', () => {
 describe('persist mode testing', () => {
 	it('should store and restore data correctly', (done) => {
     let payload = JSON.stringify({ name:  'Node persists'});
-    miniapi.withPort(PORT).withData(DATA).start();
+    miniapi.withPort(PORT).withDataFrom('./sample.json').start();
     http.request({
       host: 'localhost',
       port: PORT,
@@ -113,8 +113,8 @@ describe('persist mode testing', () => {
         data += chunk;
       });
       resp.on('end', () => {
-        //expect(JSON.parse(data)).toEqual({ id: 3, name:  'Node rules'});
-//        expect(resp.statusCode).toBe(200);
+        expect(JSON.parse(data)).toEqual({ id: 3, name:  'Node persists'});
+        expect(resp.statusCode).toBe(200);
         done();
         miniapi.stop();
       });

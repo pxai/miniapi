@@ -4,4 +4,5 @@ miniapi
   .withPort(3200)
   .withId('_id')
   .withDataFrom('./sample.json')
+  .withPersist()
   .start();
