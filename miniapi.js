@@ -155,6 +155,6 @@ class Miniapi  {
 		fs.writeFileSync(this.file, JSON.stringify(this.data));  
 	}
   }
-};
+}
 
 module.exports=new Miniapi('user');

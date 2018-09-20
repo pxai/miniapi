@@ -11,18 +11,24 @@ module.exports = {
     "rules": {
         "accessor-pairs": "error",
         "array-bracket-newline": "error",
-        "array-bracket-spacing": "off",
+        "array-bracket-spacing": [
+            "error",
+            "never"
+        ],
         "array-callback-return": "error",
         "array-element-newline": "off",
         "arrow-body-style": "error",
         "arrow-parens": [
             "error",
-            "as-needed",
+            "as-needed"
+        ],
+        "arrow-spacing": [
+            "error",
             {
-                "requireForBlockBody": true
+                "after": true,
+                "before": true
             }
         ],
-        "arrow-spacing": "off",
         "block-scoped-var": "error",
         "block-spacing": [
             "error",
@@ -114,8 +120,8 @@ module.exports = {
         "max-classes-per-file": "error",
         "max-depth": "error",
         "max-len": "off",
-        "max-lines": "off",
-        "max-lines-per-function": "off",
+        "max-lines": "error",
+        "max-lines-per-function": "error",
         "max-nested-callbacks": "error",
         "max-params": "off",
         "max-statements": "off",
@@ -125,7 +131,7 @@ module.exports = {
         "new-parens": "error",
         "newline-after-var": "off",
         "newline-before-return": "off",
-        "newline-per-chained-call": "off",
+        "newline-per-chained-call": "error",
         "no-alert": "error",
         "no-array-constructor": "error",
         "no-await-in-loop": "error",
@@ -209,7 +215,7 @@ module.exports = {
         "no-underscore-dangle": "error",
         "no-unmodified-loop-condition": "error",
         "no-unneeded-ternary": "error",
-        "no-unused-expressions": "off",
+        "no-unused-expressions": "error",
         "no-use-before-define": "error",
         "no-useless-call": "error",
         "no-useless-computed-key": "error",
@@ -275,10 +281,6 @@ module.exports = {
         "space-infix-ops": "off",
         "space-unary-ops": "error",
         "spaced-comment": [
-            "error",
-            "never"
-        ],
-        "strict": [
             "error",
             "never"
         ],

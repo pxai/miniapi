@@ -67,7 +67,7 @@ class RequestHandler {
     } else if (url[1] === this.name && url[2] != '') {
       data = this.data.filter( item => item[this.id]==url[2])[0] || {};
       this.data = this.data.filter( item => item[this.id]!=url[2]);
-      res.statusCode = data[this.id]==undefined?404:200;;
+      res.statusCode = data[this.id]==undefined?404:200;
     }
     res.data = data;
           log.byCode(`➖ DELETE ${res.statusCode} ${url}`, res.statusCode);
