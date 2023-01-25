@@ -59,8 +59,7 @@ class Miniapi  {
 	  this.file = file;
       this.data = JSON.parse(fs.readFileSync(this.file));
       } catch (e) {
-	console.log('ERROR' + e);
-       //this.data = [];
+	      console.log('ERROR' + e);
       }
       return this;
   }
@@ -90,7 +89,11 @@ class Miniapi  {
 
     this.server = http.createServer((req, res) => {
     let url = req.url.split("/");
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Content-Type', this.contentType);
+	  res.setHeader('Access-Control-Allow-Methods','GET, POST, PATCH, PUT, DELETE, OPTIONS');
+	  res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+    
     if (req.method === 'POST' || req.method === 'PUT' || req.method === 'PATCH') {
         var body = '';
         var self = this;
@@ -140,13 +143,17 @@ class Miniapi  {
       case 'DELETE':
                     res = requestHandler.delete(url, method, res);
                     break;
+      case 'OPTIONS':
+                    res.data = {};
+                    res.statusCode = 200;
+                    break;
       default:
                     res.data = { error: 'Whatever you tried, it is not supported.'};
                     res.statusCode = 404;
                     break;
      }
 
-	  if (method !== 'GET') { this.persistIfEnabled(); }
+	  if (method !== 'GET' || method !== 'OPTIONS') { this.persistIfEnabled(); }
       res.end(`${JSON.stringify(res.data)}\n`);
   }
 
